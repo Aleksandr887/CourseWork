@@ -1,8 +1,11 @@
-bin/kurs: build/kurs.o
-	gcc -Wall -o bin/kurs build/kurs.o
+bin/main: build/main.o build/func.o
+	gcc -Wall -o bin/main build/main.o build/func.o
 
-build/kurs.o: src/kurs.c
-	gcc -Wall -c src/kurs.c -o build/kurs.o
+build/func.o: src/func.c src/func.h
+	gcc -Wall -c src/func.c -o build/func.o
+
+build/main.o: src/main.c src/func.h
+	gcc -Wall -c src/main.c -o build/main.o
 
 clean:
-	rm -rf build/kurs.o bin/kurs
+	rm -rf build/main.o bin/main
