@@ -30,7 +30,7 @@ int main()
                 correct++;
             } else {
                 if (strcmp(word, end) == 0) {
-                    time_end = time_end + wtime() - time_start;
+                    time_end = wtime() - time_start;
                     print(correct, uncorrect, time_end);
                 } else {
                     printf("Слово неверно\n");
@@ -39,9 +39,6 @@ int main()
             }
             i++;
         }
-        time_end = wtime();
-        time_end -= time_start;
-        print(correct, uncorrect, time_end);
     }
     return 0;
 }
