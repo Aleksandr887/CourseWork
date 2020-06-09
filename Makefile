@@ -8,4 +8,4 @@ build/main.o: src/main.c src/func.h
 	gcc -Wall -c src/main.c -o build/main.o
 
 clean:
-	rm -rf build/main.o bin/main
+	rm -rf build/main.o bin/main build/func.o

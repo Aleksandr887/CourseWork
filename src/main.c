@@ -19,6 +19,8 @@ int main()
     int correct = 0;
     FILE* f = fopen("words.txt", "r");
     if (begin(run) == 0) {
+        double time_start = 0, time_end = 0;
+        time_start = wtime();
         while (fscanf(f, "%s", worrd.name) != EOF) {
             printf("\"%s\"\n", worrd.name);
             printf("Write this word ");
@@ -28,7 +30,8 @@ int main()
                 correct++;
             } else {
                 if (strcmp(word, end) == 0) {
-                    print(correct, uncorrect);
+                    time_end = time_end + wtime() - time_start;
+                    print(correct, uncorrect, time_end);
                 } else {
                     printf("Слово неверно\n");
                     uncorrect++;
@@ -36,7 +39,9 @@ int main()
             }
             i++;
         }
-        print(correct, uncorrect);
+        time_end = wtime();
+        time_end -= time_start;
+        print(correct, uncorrect, time_end);
     }
     return 0;
 }

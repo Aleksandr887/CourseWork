@@ -21,8 +21,8 @@ double wtime()
     return (double)t.tv_sec + (double)t.tv_usec * 1E-6;
 }
 
-void print(int correct, int uncorrect)
+void print(int correct, int uncorrect, double time)
 {
-    printf("Correct words: %d\nUncorrect words: %d\n", correct, uncorrect);
+    printf("Correct words: %d\nUncorrect words: %d\nTime: %lf\n", correct, uncorrect, time);
     exit(0);
 }
