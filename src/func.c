@@ -29,3 +29,28 @@ void print(int correct, int uncorrect, double time)
            time);
     exit(0);
 }
+
+void max_len_amount_lines(int* amount, int* maxlen, FILE* f)
+{
+    char ch;
+    int i = 0;
+    while (1) {
+        ch = fgetc(f);
+        if ((ch == '\n') || (ch == EOF)) {
+            if (*maxlen < i)
+                *maxlen = i;
+            i = 0;
+            if (ch == EOF)
+                break;
+            ++*amount;
+        } else
+            i++;
+    }
+    fseek(f, 0, SEEK_SET);
+}
+
+int getrand(int min, int max)
+{
+    srand(time(NULL));
+    return (double)rand() / (RAND_MAX + 1.0) * (max - min) + min;
+}
