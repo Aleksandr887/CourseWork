@@ -23,6 +23,9 @@ double wtime()
 
 void print(int correct, int uncorrect, double time)
 {
-    printf("Correct words: %d\nUncorrect words: %d\nTime: %lf\n", correct, uncorrect, time);
+    printf("Correct words: %d\nUncorrect words: %d\nTime: %lf\n",
+           correct,
+           uncorrect,
+           time);
     exit(0);
 }
