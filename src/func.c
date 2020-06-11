@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdio_ext.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
@@ -10,6 +11,7 @@ int begin()
     printf("Keyboard Ninja. Напишите \"ENTER\" для начала игры.\nЧтобы "
            "закончить напишите \"end\"\n");
     getchar();
+    __fpurge(stdin);
     int tik = 0;
     printf("Приготовьтесь\n");
     while (1) {
