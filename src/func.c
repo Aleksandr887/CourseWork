@@ -3,14 +3,27 @@
 #include <string.h>
 #include <sys/time.h>
 #include <time.h>
+#include <unistd.h>
 
-int begin(char run[4])
+int begin()
 {
-    while (strcmp(run, "run") != 0) {
-        printf("Keyboard Ninja. Напишите \"run\" для начала игры.\nЧтобы "
-               "закончить напишите \"end\"\n");
-        scanf("%s", run);
+    printf("Keyboard Ninja. Напишите \"ENTER\" для начала игры.\nЧтобы "
+           "закончить напишите \"end\"\n");
+    getchar();
+    int tik = 0;
+    printf("Приготовьтесь\n");
+    while (1) {
+        if (tik < 3) {
+            printf("%d...\n", 3 - tik);
+        } else {
+            printf("RUN!\n");
+            break;
+        }
+        sleep(1);
+        tik++;
     }
+    sleep(1);
+    system("clear");
     return 0;
 }
 

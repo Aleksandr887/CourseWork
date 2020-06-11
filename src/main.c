@@ -17,7 +17,6 @@ int main()
     max_len_amount_lines(&amount, &maxlen, f);
     char in_word[maxlen];
     char f_word[maxlen];
-    char run[4];
     int str_num;
     char end[4] = "end";
     int uncorrect = 0;
@@ -25,7 +24,7 @@ int main()
     int i;
     double time_start = 0, time_end = 0;
 
-    if (begin(run) == 0) {
+    if (begin() == 0) {
         while (1) {
             time_start = wtime();
             str_num = getrand(0, amount);
