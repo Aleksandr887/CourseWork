@@ -1,3 +1,5 @@
+.PHONY: all run test clean
+
 all: bin/main bin-test/test-kurs
 
 bin/main: build/main.o build/func.o
@@ -17,6 +19,12 @@ build/func.o: src/func.c src/func.h
 
 build/main.o: src/main.c src/func.h
 	gcc -Wall -c src/main.c -o build/main.o
+
+run:
+	cd bin && ./main
+
+test:
+	cd bin-test && ./test-kurs
 
 clean:
 	rm -rf build/main.o bin/main build/func.o build-test/test-kurs.o build-test/main.o bin-test/test-kurs
