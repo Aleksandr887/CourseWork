@@ -11,7 +11,7 @@ int main()
     int maxlen = -1;
     setting_lang* l = malloc(sizeof(setting_lang));
 
-    FILE* f;
+    FILE* f = NULL;
     char lang[4];
     while (f == NULL) {
         printf("Choose language\neng\nrus\n");
