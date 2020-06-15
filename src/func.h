@@ -11,8 +11,13 @@ typedef struct {
     char* un;
     char* time;
     char* write;
+    char* sett;
+    char* message_sett;
+    char* close;
+    char* dunno;
 } setting_lang;
 
+int main();
 int begin(setting_lang* l);
 void print(int correct, int uncorrect, double time, setting_lang* l);
 void max_len_amount_lines(int* amount, int* maxlen, FILE* f);

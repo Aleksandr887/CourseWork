@@ -45,6 +45,19 @@ void print(int correct, int uncorrect, double time, setting_lang* l)
            uncorrect,
            l->time,
            time);
+    while (1) {
+        char sett[40];
+        printf("%s\n", l->message_sett);
+        scanf("%s", sett);
+        if (strcmp(sett, l->sett) == 0) {
+            main();
+            break;
+        } else if (strcmp(sett, l->close) == 0) {
+            exit(0);
+        } else {
+            printf("%s\n", l->dunno);
+        }
+    }
     exit(0);
 }
 
@@ -122,6 +135,18 @@ void language(char lang[], setting_lang* l)
     l->write = malloc(max_len * sizeof(char));
     fgets(l->write, max_len, conf);
 
+    l->sett = malloc(max_len * sizeof(char));
+    fgets(l->sett, max_len, conf);
+
+    l->message_sett = malloc(max_len * sizeof(char));
+    fgets(l->message_sett, max_len, conf);
+
+    l->close = malloc(max_len * sizeof(char));
+    fgets(l->close, max_len, conf);
+
+    l->dunno = malloc(max_len * sizeof(char));
+    fgets(l->dunno, max_len, conf);
+
     rm_last_sym(l);
     fclose(conf);
 }
@@ -136,4 +161,8 @@ void rm_last_sym(setting_lang* l)
     l->un[strlen(l->un) - 1] = '\0';
     l->time[strlen(l->time) - 1] = '\0';
     l->write[strlen(l->write) - 1] = '\0';
+    l->sett[strlen(l->sett) - 1] = '\0';
+    l->message_sett[strlen(l->message_sett) - 1] = '\0';
+    l->close[strlen(l->close) - 1] = '\0';
+    l->dunno[strlen(l->dunno) - 1] = '\0';
 }
