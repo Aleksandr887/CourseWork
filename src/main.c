@@ -7,27 +7,36 @@
 
 int main()
 {
-    FILE* f = fopen("words.txt", "r");
-    if (f == NULL) {
-        return 1;
-    }
-
     int amount = 0;
     int maxlen = -1;
+    setting_lang* l = malloc(sizeof(setting_lang));
+
+    FILE* f;
+    char lang[4];
+    while (f == NULL) {
+        printf("Choose language\neng\nrus\n");
+        scanf("%s", lang);
+        set_lang(lang, &f, l);
+    }
+
+    amount = 0;
+    maxlen = -1;
     max_len_amount_lines(&amount, &maxlen, f);
-    char in_word[maxlen];
-    char f_word[maxlen];
+    char in_word[maxlen * 2];
+    char f_word[maxlen * 2];
     int str_num;
-    char end[4] = "end";
+    char end[] = "end";
+    char endr[] = "конец";
     int uncorrect = 0;
     int correct = 0;
     int i;
     double time_start = 0, time_end = 0;
 
-    if (begin() == 0) {
+    getchar();
+    if (begin(l) == 0) {
         while (1) {
             time_start = wtime();
-            str_num = getrand(0, amount);
+            str_num = getrand(0, amount - 1);
             fseek(f, 0, SEEK_SET);
             i = 0;
             while (i != str_num) {
@@ -36,16 +45,17 @@ int main()
                 }
             }
             printf("\"%s\"\n", f_word);
-            printf("Write this word ");
+            printf("%s ", l->write);
             scanf("%s", in_word);
             if (strcmp(f_word, in_word) == 0) {
-                printf("Слово верно\n");
+                printf("%s\n", l->correct);
                 correct++;
             } else {
-                if (strcmp(in_word, end) == 0) {
-                    print(correct, uncorrect, time_end);
+                if ((strcmp(in_word, end) == 0)
+                    || (strcmp(in_word, endr) == 0)) {
+                    print(correct, uncorrect, time_end, l);
                 } else {
-                    printf("Слово неверно\n");
+                    printf("%s\n", l->uncorrect);
                     uncorrect++;
                 }
             }
