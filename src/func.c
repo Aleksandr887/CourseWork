@@ -58,7 +58,6 @@ void print(int correct, int uncorrect, double time, setting_lang* l)
             printf("%s\n", l->dunno);
         }
     }
-    exit(0);
 }
 
 void max_len_amount_lines(int* amount, int* maxlen, FILE* f)
