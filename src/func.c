@@ -134,13 +134,22 @@ int getrand(int min, int max)
 
 int set_lang(char lang[], FILE** f, char* str[], int maxlen, int amount)
 {
-    if (strcmp(lang, "rus") == 0) {
-        *f = fopen("rus.txt", "r");
-    } else if (strcmp(lang, "eng") == 0) {
-        *f = fopen("eng.txt", "r");
-    } else if (strcmp(lang, "other") == 0) {
-        strcpy(lang, "eng");
-        give_words_playlist(&f);
+    while (1) {
+        if (strcmp(lang, "rus") == 0) {
+            *f = fopen("rus.txt", "r");
+            break;
+        } else if (strcmp(lang, "eng") == 0) {
+            *f = fopen("eng.txt", "r");
+            break;
+        } else if (strcmp(lang, "other") == 0) {
+            strcpy(lang, "eng");
+            give_words_playlist(&f);
+            break;
+        } else {
+            printf("Don't understand what that means\n");
+            printf("Choose language\neng\nrus\nother\n");
+            scanf("%s", lang);
+        }
     }
     language(lang, str, maxlen, amount);
     return 0;
