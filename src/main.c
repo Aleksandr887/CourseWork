@@ -9,7 +9,6 @@ int main()
 {
     int amount = 0;
     int maxlen = -1;
-
     FILE* f = fopen("lang.cfg", "r");
     max_len_amount_lines(&amount, &maxlen, f);
     fclose(f);
@@ -20,7 +19,7 @@ int main()
     while (f == NULL) {
         printf("Choose language\neng\nrus\n");
         scanf("%s", lang);
-        set_lang(lang, &f, str);
+        set_lang(lang, &f, str, maxlen, amount);
     }
 
     amount = 0;
