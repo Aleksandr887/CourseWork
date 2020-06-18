@@ -7,18 +7,18 @@
 #include <time.h>
 #include <unistd.h>
 
-int begin(setting_lang* l)
+int begin(char* str[])
 {
-    printf("%s\n", l->hello);
+    printf("%s\n", str[0]);
     getchar();
     __fpurge(stdin);
     int tik = 0;
-    printf("%s\n", l->getready);
+    printf("%s\n", str[1]);
     while (1) {
         if (tik < 3) {
             printf("%d...\n", 3 - tik);
         } else {
-            printf("RUN!\n");
+            printf("%s\n", str[12]);
             break;
         }
         sleep(1);
@@ -36,26 +36,26 @@ double wtime()
     return (double)t.tv_sec + (double)t.tv_usec * 1E-6;
 }
 
-void print(int correct, int uncorrect, double time, setting_lang* l)
+void print(int correct, int uncorrect, double time, char* str[])
 {
     printf("%s %d\n%s %d\n%s %lf\n",
-           l->co,
+           str[4],
            correct,
-           l->un,
+           str[5],
            uncorrect,
-           l->time,
+           str[6],
            time);
     while (1) {
         char sett[40];
-        printf("%s\n", l->message_sett);
+        printf("%s\n", str[9]);
         scanf("%s", sett);
-        if (strcmp(sett, l->sett) == 0) {
+        if (strcmp(sett, str[8]) == 0) {
             main();
             break;
-        } else if (strcmp(sett, l->close) == 0) {
+        } else if (strcmp(sett, str[10]) == 0) {
             exit(0);
         } else {
-            printf("%s\n", l->dunno);
+            printf("%s\n", str[11]);
         }
     }
 }
@@ -85,31 +85,31 @@ int getrand(int min, int max)
     return (double)rand() / (RAND_MAX + 1.0) * (max - min) + min;
 }
 
-int set_lang(char lang[], FILE** f, setting_lang* l)
+int set_lang(char lang[], FILE** f, char* str[])
 {
     if (strcmp(lang, "rus") == 0) {
         *f = fopen("rus.txt", "r");
     } else if (strcmp(lang, "eng") == 0) {
         *f = fopen("eng.txt", "r");
     }
-    language(lang, l);
+    language(lang, str);
     return 0;
 }
 
-void language(char lang[], setting_lang* l)
+void language(char lang[], char* str[])
 {
-    char str[4];
+    char lan[4];
     int max_len = -1;
     int amount = 0;
 
     FILE* conf = fopen("lang.cfg", "r");
     max_len_amount_lines(&amount, &max_len, conf);
     max_len += 2;
-    while (strcmp(str, lang) != 0) {
-        fgets(str, 4, conf);
+    while (strcmp(lan, lang) != 0) {
+        fgets(lan, 4, conf);
     }
-
-    l->hello = malloc(max_len * sizeof(char));
+    char* buf = malloc(max_len * sizeof(char));
+    /*l->hello = malloc(max_len * sizeof(char));
     fgets(l->hello, max_len, conf);
     fgets(l->hello, max_len, conf);
 
@@ -144,15 +144,23 @@ void language(char lang[], setting_lang* l)
     fgets(l->close, max_len, conf);
 
     l->dunno = malloc(max_len * sizeof(char));
-    fgets(l->dunno, max_len, conf);
-
-    rm_last_sym(l);
+    fgets(l->dunno, max_len, conf);*/
+    fgets(buf, max_len, conf);
+    for (int i = 0; i < (amount - 2) / 2; i++) {
+        str[i] = malloc(max_len * sizeof(char));
+        fgets(str[i], max_len, conf);
+    }
+    rm_last_sym(str, amount);
     fclose(conf);
+    free(buf);
 }
 
-void rm_last_sym(setting_lang* l)
+void rm_last_sym(char* str[], int amount)
 {
-    l->hello[strlen(l->hello) - 1] = '\0';
+    for (int i = 0; i < (amount - 2) / 2; i++) {
+        str[i][strlen(str[i]) - 1] = '\0';
+    }
+    /*l->hello[strlen(l->hello) - 1] = '\0';
     l->getready[strlen(l->getready) - 1] = '\0';
     l->correct[strlen(l->correct) - 1] = '\0';
     l->uncorrect[strlen(l->uncorrect) - 1] = '\0';
@@ -163,5 +171,5 @@ void rm_last_sym(setting_lang* l)
     l->sett[strlen(l->sett) - 1] = '\0';
     l->message_sett[strlen(l->message_sett) - 1] = '\0';
     l->close[strlen(l->close) - 1] = '\0';
-    l->dunno[strlen(l->dunno) - 1] = '\0';
+    l->dunno[strlen(l->dunno) - 1] = '\0';*/
 }

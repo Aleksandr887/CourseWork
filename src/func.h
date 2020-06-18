@@ -2,29 +2,14 @@
 #define FUNC_H
 #include <stdio.h>
 
-typedef struct {
-    char* hello;
-    char* getready;
-    char* correct;
-    char* uncorrect;
-    char* co;
-    char* un;
-    char* time;
-    char* write;
-    char* sett;
-    char* message_sett;
-    char* close;
-    char* dunno;
-} setting_lang;
-
 int main();
-int begin(setting_lang* l);
-void print(int correct, int uncorrect, double time, setting_lang* l);
+int begin(char* str[]);
+void print(int correct, int uncorrect, double time, char* str[]);
 void max_len_amount_lines(int* amount, int* maxlen, FILE* f);
 int getrand(int min, int max);
 double wtime();
-int set_lang(char lang[], FILE** f, setting_lang* l);
-void language(char lang[], setting_lang* l);
-void rm_last_sym(setting_lang* l);
+int set_lang(char lang[], FILE** f, char* str[]);
+void language(char lang[], char* str[]);
+void rm_last_sym(char* str[], int amount);
 
 #endif

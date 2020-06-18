@@ -9,14 +9,18 @@ int main()
 {
     int amount = 0;
     int maxlen = -1;
-    setting_lang* l = malloc(sizeof(setting_lang));
 
-    FILE* f = NULL;
+    FILE* f = fopen("lang.cfg", "r");
+    max_len_amount_lines(&amount, &maxlen, f);
+    fclose(f);
+    f = NULL;
+    char* str[(amount - 2) / 2];
+
     char lang[4];
     while (f == NULL) {
         printf("Choose language\neng\nrus\n");
         scanf("%s", lang);
-        set_lang(lang, &f, l);
+        set_lang(lang, &f, str);
     }
 
     amount = 0;
@@ -33,7 +37,7 @@ int main()
     double time_start = 0, time_end = 0;
 
     getchar();
-    if (begin(l) == 0) {
+    if (begin(str) == 0) {
         while (1) {
             time_start = wtime();
             str_num = getrand(0, amount - 1);
@@ -45,17 +49,17 @@ int main()
                 }
             }
             printf("\"%s\"\n", f_word);
-            printf("%s ", l->write);
+            printf("%s ", str[7]);
             scanf("%s", in_word);
             if (strcmp(f_word, in_word) == 0) {
-                printf("%s\n", l->correct);
+                printf("%s\n", str[2]);
                 correct++;
             } else {
                 if ((strcmp(in_word, end) == 0)
                     || (strcmp(in_word, endr) == 0)) {
-                    print(correct, uncorrect, time_end, l);
+                    print(correct, uncorrect, time_end, str);
                 } else {
-                    printf("%s\n", l->uncorrect);
+                    printf("%s\n", str[3]);
                     uncorrect++;
                 }
             }
