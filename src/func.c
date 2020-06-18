@@ -53,6 +53,10 @@ void give_words_playlist(FILE*** f)
         if (strcmp("end", words) == 0) {
             fclose(**f);
             **f = fopen(name_playlist, "r");
+            if (getc(**f) == EOF) {
+                printf("File is empty!\n");
+                exit(0);
+            }
             break;
         }
         if (strcmp("delall", words) == 0) {
