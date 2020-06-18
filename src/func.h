@@ -13,5 +13,6 @@ void language(char lang[], char* str[], int maxlen, int amount);
 void rm_last_sym(char* str[], int amount);
 void give_name_playlist(char name[30]);
 void give_words_playlist(FILE*** f);
+void delete_all_playlist(FILE**** f, char name_playlist[30]);
 
 #endif

@@ -44,7 +44,8 @@ void give_words_playlist(FILE*** f)
     give_name_playlist(name_playlist);
     char words[80];
     printf("Enter the words for your playlist.\nWhen done, write the "
-           "\"end\".\n");
+           "\"end\".\nIf you want to clear the entire playlist, write "
+           "\"delall\"\n");
     **f = fopen(name_playlist, "a");
     while (1) {
         printf("Write word: ");
@@ -54,9 +55,21 @@ void give_words_playlist(FILE*** f)
             **f = fopen(name_playlist, "r");
             break;
         }
+        if (strcmp("delall", words) == 0) {
+            delete_all_playlist(&f, name_playlist);
+            continue;
+        }
         fputs(words, **f);
         fputs("\n", **f);
     }
+}
+
+void delete_all_playlist(FILE**** f, char name_playlist[30])
+{
+    fclose(***f);
+    ***f = fopen(name_playlist, "w");
+    fclose(***f);
+    ***f = fopen(name_playlist, "a");
 }
 
 double wtime()
