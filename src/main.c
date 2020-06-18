@@ -17,7 +17,7 @@ int main()
 
     char lang[4];
     while (f == NULL) {
-        printf("Choose language\neng\nrus\n");
+        printf("Choose language\neng\nrus\nother\n");
         scanf("%s", lang);
         set_lang(lang, &f, str, maxlen, amount);
     }

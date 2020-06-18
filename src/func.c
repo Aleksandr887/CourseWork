@@ -29,6 +29,36 @@ int begin(char* str[])
     return 0;
 }
 
+void give_name_playlist(char name[30])
+{
+    char txt[8] = ".txt";
+    printf("Write the name of your playlist.\nIf the playlist already exists, "
+           "write its name\n");
+    scanf("%s", name);
+    strcat(name, txt);
+}
+
+void give_words_playlist(FILE*** f)
+{
+    char name_playlist[30];
+    give_name_playlist(name_playlist);
+    char words[80];
+    printf("Enter the words for your playlist.\nWhen done, write the "
+           "\"end\".\n");
+    **f = fopen(name_playlist, "a");
+    while (1) {
+        printf("Write word: ");
+        scanf("%s", words);
+        if (strcmp("end", words) == 0) {
+            fclose(**f);
+            **f = fopen(name_playlist, "r");
+            break;
+        }
+        fputs(words, **f);
+        fputs("\n", **f);
+    }
+}
+
 double wtime()
 {
     struct timeval t;
@@ -91,6 +121,9 @@ int set_lang(char lang[], FILE** f, char* str[], int maxlen, int amount)
         *f = fopen("rus.txt", "r");
     } else if (strcmp(lang, "eng") == 0) {
         *f = fopen("eng.txt", "r");
+    } else if (strcmp(lang, "other") == 0) {
+        strcpy(lang, "eng");
+        give_words_playlist(&f);
     }
     language(lang, str, maxlen, amount);
     return 0;
