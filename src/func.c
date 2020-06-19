@@ -29,29 +29,34 @@ int begin(char* str[])
     return 0;
 }
 
-void give_name_playlist(char name[30])
+void give_name_playlist(char name[], size_t max_name)
 {
     printf("Write the name of your playlist.\nIf the playlist already exists, "
            "write its name\n");
     scanf("%s", name);
     strcat(name, ".txt");
-    check_playlist(name);
+    if (strlen(name) > max_name) {
+        printf("Playlist title too long\n");
+        exit(0);
+    }
+    check_playlist(name, max_name);
 }
 
-void check_playlist(char name[30])
+void check_playlist(char name[], size_t max_name)
 {
     if ((strncmp(name, "eng.txt", 7) == 0)
         || (strncmp(name, "rus.txt", 7) == 0)) {
         system("clear");
         printf("Cannot edit standart playlists\n");
-        give_name_playlist(name);
+        give_name_playlist(name, max_name);
     }
 }
 
 void give_words_playlist(FILE*** f)
 {
-    char name_playlist[30];
-    give_name_playlist(name_playlist);
+    size_t max_name = 30;
+    char name_playlist[max_name];
+    give_name_playlist(name_playlist, max_name);
     char words[80];
     **f = fopen(name_playlist, "a");
     while (1) {
@@ -79,7 +84,7 @@ void give_words_playlist(FILE*** f)
     }
 }
 
-void delete_all_playlist(FILE**** f, char name_playlist[30])
+void delete_all_playlist(FILE**** f, char name_playlist[])
 {
     fclose(***f);
     ***f = fopen(name_playlist, "w");
