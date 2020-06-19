@@ -35,6 +35,8 @@ int main()
     int i;
     double time_start = 0, time_end = 0;
 
+    system("clear");
+
     getchar();
     if (begin(str) == 0) {
         while (1) {
@@ -51,6 +53,7 @@ int main()
             printf("%s ", str[7]);
             scanf("%s", in_word);
             if (strcmp(f_word, in_word) == 0) {
+                system("clear");
                 printf("%s\n", str[2]);
                 correct++;
             } else {
@@ -58,6 +61,7 @@ int main()
                     || (strcmp(in_word, endr) == 0)) {
                     print(correct, uncorrect, time_end, str);
                 } else {
+                    system("clear");
                     printf("%s\n", str[3]);
                     uncorrect++;
                 }

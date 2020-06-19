@@ -31,11 +31,11 @@ int begin(char* str[])
 
 void give_name_playlist(char name[30])
 {
-    char txt[8] = ".txt";
+    system("clear");
     printf("Write the name of your playlist.\nIf the playlist already exists, "
            "write its name\n");
     scanf("%s", name);
-    strcat(name, txt);
+    strcat(name, ".txt");
 }
 
 void give_words_playlist(FILE*** f)
@@ -43,11 +43,12 @@ void give_words_playlist(FILE*** f)
     char name_playlist[30];
     give_name_playlist(name_playlist);
     char words[80];
-    printf("Enter the words for your playlist.\nWhen done, write the "
-           "\"end\".\nIf you want to clear the entire playlist, write "
-           "\"delall\"\n");
     **f = fopen(name_playlist, "a");
     while (1) {
+        system("clear");
+        printf("Enter the words for your playlist.\nWhen done, write the "
+               "\"end\".\nIf you want to clear the entire playlist, write "
+               "\"delall\"\n");
         printf("Write word: ");
         scanf("%s", words);
         if (strcmp("end", words) == 0) {
@@ -85,6 +86,7 @@ double wtime()
 
 void print(int correct, int uncorrect, double time, char* str[])
 {
+    system("clear");
     printf("%s %d\n%s %d\n%s %lf\n",
            str[4],
            correct,
@@ -94,7 +96,7 @@ void print(int correct, int uncorrect, double time, char* str[])
            time);
     while (1) {
         char sett[40];
-        printf("%s\n", str[9]);
+        printf("\n%s\n", str[9]);
         scanf("%s", sett);
         if (strcmp(sett, str[8]) == 0) {
             main();
@@ -146,6 +148,7 @@ int set_lang(char lang[], FILE** f, char* str[], int maxlen, int amount)
             give_words_playlist(&f);
             break;
         } else {
+            system("clear");
             printf("Don't understand what that means\n");
             printf("Choose language\neng\nrus\nother\n");
             scanf("%s", lang);
