@@ -31,11 +31,21 @@ int begin(char* str[])
 
 void give_name_playlist(char name[30])
 {
-    system("clear");
     printf("Write the name of your playlist.\nIf the playlist already exists, "
            "write its name\n");
     scanf("%s", name);
     strcat(name, ".txt");
+    check_playlist(name);
+}
+
+void check_playlist(char name[30])
+{
+    if ((strncmp(name, "eng.txt", 7) == 0)
+        || (strncmp(name, "rus.txt", 7) == 0)) {
+        system("clear");
+        printf("Cannot edit standart playlists\n");
+        give_name_playlist(name);
+    }
 }
 
 void give_words_playlist(FILE*** f)
@@ -136,6 +146,7 @@ int getrand(int min, int max)
 
 int set_lang(char lang[], FILE** f, char* str[], int maxlen, int amount)
 {
+    system("clear");
     while (1) {
         if (strcmp(lang, "rus") == 0) {
             *f = fopen("rus.txt", "r");
