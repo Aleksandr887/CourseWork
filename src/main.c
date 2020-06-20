@@ -19,8 +19,11 @@ int main()
     while (f == NULL) {
         printf("Choose language\neng\nrus\nother\n");
         scanf("%s", lang);
+        system("clear");
         set_lang(lang, &f, str, maxlen, amount);
     }
+    language(lang, str, maxlen, amount);
+    rm_last_sym(str, amount);
 
     amount = 0;
     maxlen = -1;

@@ -6,7 +6,7 @@ bin/main: build/main.o build/func.o
 	gcc -Wall -o bin/main build/main.o build/func.o
 
 bin-test/test-kurs: build-test/main.o build-test/test-kurs.o build/func.o
-	gcc -Wall -o bin-test/test-kurs build-test/main.o build-test/test-kurs.o build/func.o && clear
+	gcc -Wall -o bin-test/test-kurs build-test/main.o build-test/test-kurs.o build/func.o
 
 build-test/main.o: test/main.c src/func.h thirdparty/ctest.h
 	gcc -Wall -I thirdparty -c test/main.c -o build-test/main.o

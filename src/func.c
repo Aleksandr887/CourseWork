@@ -151,13 +151,15 @@ int getrand(int min, int max)
 
 int set_lang(char lang[], FILE** f, char* str[], int maxlen, int amount)
 {
-    system("clear");
+    int result;
     while (1) {
         if (strcmp(lang, "rus") == 0) {
             *f = fopen("rus.txt", "r");
+            result = 1;
             break;
         } else if (strcmp(lang, "eng") == 0) {
             *f = fopen("eng.txt", "r");
+            result = 2;
             break;
         } else if (strcmp(lang, "other") == 0) {
             strcpy(lang, "eng");
@@ -170,8 +172,7 @@ int set_lang(char lang[], FILE** f, char* str[], int maxlen, int amount)
             scanf("%s", lang);
         }
     }
-    language(lang, str, maxlen, amount);
-    return 0;
+    return result;
 }
 
 void language(char lang[], char* str[], int maxlen, int amount)
@@ -179,6 +180,7 @@ void language(char lang[], char* str[], int maxlen, int amount)
     char lan[4];
 
     FILE* conf = fopen("lang.cfg", "r");
+
     maxlen += 2;
     while (strcmp(lan, lang) != 0) {
         fgets(lan, 4, conf);
@@ -189,14 +191,14 @@ void language(char lang[], char* str[], int maxlen, int amount)
         str[i] = malloc(maxlen * sizeof(char));
         fgets(str[i], maxlen, conf);
     }
-    rm_last_sym(str, amount);
     fclose(conf);
     free(buf);
 }
 
-void rm_last_sym(char* str[], int amount)
+int rm_last_sym(char* str[], int amount)
 {
     for (int i = 0; i < (amount - 2) / 2; i++) {
         str[i][strlen(str[i]) - 1] = '\0';
     }
+    return 0;
 }
