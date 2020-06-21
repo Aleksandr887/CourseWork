@@ -5,4 +5,6 @@ compiler: gcc
 dist: xenial
 
 script: 
-  - git ls-files src/ | xargs clang-format -i && git diff --exit-code
+  - make && make test
+  - git ls-files src/*.c | xargs clang-format -i && git diff --exit-code
+  - git ls-files test/*.c | xargs clang-format -i && git diff --exit-code
