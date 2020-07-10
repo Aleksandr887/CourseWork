@@ -4,10 +4,11 @@
 #include <string.h>
 #include <sys/time.h>
 #include <time.h>
+#include <unistd.h>
 
 int main()
 {
-    int amount = 0;
+    /*int amount = 0;
     int maxlen = -1;
     FILE* f = fopen("lang.cfg", "r");
     max_len_amount_lines(&amount, &maxlen, f);
@@ -72,6 +73,25 @@ int main()
             time_end = time_end + wtime() - time_start;
         }
     }
+	*/
+	int len = get_rand(2, 10);
+	char rstr[len + 1];
+	int j;
+	for (int i = 0; i < len; i++) {
+		rstr[i] = rand_eng_char();
+		printf("%c\n", rstr[i]);
+	}
+	rstr[len] = '\0';
+	printf("%s\n", rstr);
+	scanf("%d", &j);
 
+	int len1 = get_rand(2, 10);
+	char rstr1[len + 1];
+	for (int i = 0; i < len1; i++) {
+		rstr1[i] = rand_eng_char();
+		printf("%c\n", rstr1[i]);
+	}
+	rstr1[len1] = '\0';
+	printf("%s\n", rstr1);
     return 0;
 }

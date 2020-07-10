@@ -143,7 +143,7 @@ void max_len_amount_lines(int* amount, int* maxlen, FILE* f)
     fseek(f, 0, SEEK_SET);
 }
 
-int getrand(int min, int max)
+int get_rand(int min, int max)
 {
     srand(time(NULL));
     return (double)rand() / (RAND_MAX + 1.0) * (max - min) + min;
@@ -201,4 +201,9 @@ int rm_last_sym(char* str[], int amount)
         str[i][strlen(str[i]) - 1] = '\0';
     }
     return 0;
+}
+
+int rand_eng_char()
+{
+    return (double)rand() / (RAND_MAX + 1.0) * ('a' - 'z') + 'z';
 }
