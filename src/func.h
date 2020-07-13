@@ -1,6 +1,7 @@
 #ifndef FUNC_H
 #define FUNC_H
 #include <stdio.h>
+#include <stddef.h>
 
 int main();
 int begin(char* str[]);
@@ -16,5 +17,6 @@ void check_playlist(char name[], size_t max_name);
 void give_words_playlist(FILE*** f);
 void delete_all_playlist(FILE**** f, char name_playlist[]);
 int rand_eng_char();
+int rand_rus_char(int* buf_1, int* buf_2);
 
 #endif

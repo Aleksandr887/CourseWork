@@ -1,4 +1,5 @@
 #include "func.h"
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -73,25 +74,27 @@ int main()
             time_end = time_end + wtime() - time_start;
         }
     }
-	*/
-	int len = get_rand(2, 10);
-	char rstr[len + 1];
-	int j;
-	for (int i = 0; i < len; i++) {
-		rstr[i] = rand_eng_char();
-		printf("%c\n", rstr[i]);
-	}
-	rstr[len] = '\0';
-	printf("%s\n", rstr);
-	scanf("%d", &j);
+        */
+    int len_eng = get_rand(2, 10);
+    char eng_str[len_eng + 1];
+    for (int i = 0; i < len_eng; i++) {
+        eng_str[i] = rand_eng_char();
+    }
+    eng_str[len_eng] = '\0';
 
-	int len1 = get_rand(2, 10);
-	char rstr1[len + 1];
-	for (int i = 0; i < len1; i++) {
-		rstr1[i] = rand_eng_char();
-		printf("%c\n", rstr1[i]);
-	}
-	rstr1[len1] = '\0';
-	printf("%s\n", rstr1);
-    return 0;
+    printf("%s\n", eng_str);
+
+    int buf_1, buf_2;
+    int len_rus = get_rand(2, 10) * 2;
+
+    char rus_str[len_rus + 1];
+
+    for (int i = 0; i < len_rus; i += 2) {
+        rand_rus_char(&buf_1, &buf_2);
+        rus_str[i] = buf_1;
+        rus_str[i + 1] = buf_2;
+    }
+    rus_str[len_rus] = '\0';
+
+    printf("%s\n", rus_str);
 }

@@ -207,3 +207,21 @@ int rand_eng_char()
 {
     return (double)rand() / (RAND_MAX + 1.0) * ('a' - 'z') + 'z';
 }
+
+int rand_rus_char(int* buf_1, int* buf_2)
+{
+    int rand_sym;
+    char list[67] = "абвгдеёжзийклмнопрстуфчцчшщъыьэюя";
+
+    rand_sym = (double)rand() / (RAND_MAX + 1.0) * 64;
+    ;
+
+    if (rand_sym % 2 != 0) {
+        rand_sym++;
+    }
+
+    *buf_1 = list[rand_sym];
+    *buf_2 = list[rand_sym + 1];
+
+    return 0;
+}
